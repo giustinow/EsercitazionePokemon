@@ -45,27 +45,26 @@ public class Gestione {
 	}
 
 	public void updatePokemonName(int id, String pokemonName) throws SQLException {
-		String queryModificaPokemon = "UPDATE `pokemon`.`pokemon` SET pokemon.nome = ? WHERE id = ?;";
+		String queryModificaPokemon = "UPDATE `pokemon`.`pokemon` SET pokemon.nome = ? WHERE id = ?";
 		PreparedStatement prepareStatement = connessione.prepareStatement(queryModificaPokemon);
 		prepareStatement.setString(1, pokemonName);
 		prepareStatement.setInt(2, id);
-		prepareStatement.execute();
+		prepareStatement.executeUpdate();
 	}
 
 	public void retrivePokemon() throws SQLException {
-		int contatore = 1;
 		ResultSet risultatoQuery = statement.executeQuery("select * from `pokemon`.`pokemon`");
 		System.out.println(" ID "+ " " + "  Nome  " + " " + " HP"  + "" + " ATK " + "" + "DEF " + "" + "RES " + "" + "Evoluzione");
 		System.out.println("------------------------------------------");
 		while (risultatoQuery.next()) {
+			int autoIncKeyFromFunc = risultatoQuery.getInt(1);
 			String nome = risultatoQuery.getString("Nome");
 			int hp = risultatoQuery.getInt("hp");
 			int atk = risultatoQuery.getInt("ATK");
 			int def = risultatoQuery.getInt("DEF");
 			int res = risultatoQuery.getInt("RES");
 			String evoluzione = risultatoQuery.getString("evoluzione");
-			System.out.println("[ " + contatore + " ] " +  nome + " " + hp + " " + atk + " " + def + " " + res + " " + evoluzione);
-			contatore++;
+			System.out.println("[ " + autoIncKeyFromFunc + " ] " +  nome + " " + hp + " " + atk + " " + def + " " + res + " " + evoluzione);
 		}
 	}
 

@@ -68,7 +68,9 @@ public class Main {
 	public static int scegliId (Scanner input, Gestione gestione) throws SQLException {
 		gestione.retrivePokemon();
 		System.out.println("Scegli l'ID del pokemon");
-		return input.nextInt();	
+		int scelta = input.nextInt();	
+		input.nextLine();
+		return scelta;
 	}
 	public static String nomeNuovo(Scanner input) {
 		System.out.println("Inserisci il nome del nuovo Pokemon");
